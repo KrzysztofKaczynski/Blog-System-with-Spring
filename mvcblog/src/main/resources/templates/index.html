@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: site-head">
+    <meta charset="UTF-8"/>
     <title>BLOG</title>
 </head>
 
@@ -9,11 +10,28 @@
 
 <header th:replace="layout :: site-header"/>
 
-<h1>Witaj na moim blogu</h1>
+<main id="posts">
+    <article th:each="p : ${latest3posts}">
+        <h2 class="title" th:text="${p.title}">Post Title</h2>
+        <div class="date">
+            <i>Posted on</i>
+            <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-August-2018</span>
+            <span th:if="${p.author}" th:remove="tag">
+          <i>by</i>
+          <span th:text="${p.author.fullName != null ? p.author.fullName : p.author.username}">Mały Kriszo</span>
+        </span>
+        </div>
+        <p class="content" th:utext="${p.body}">Post content</p>
+    </article>
+</main>
+<aside>
+    <h2>Recent Posts</h2>
+    <a href="#" th:each="p : ${latest5posts}"
+       th:text="${p.title}"
+       th:href="@{/posts/view/{id}/(id=${p.id})}">Posty</a>
+</aside>
 
-Teraz jest: <b th:text="${#execInfo.now.time}"></b>
-
-<footer th:replace="layout :: site-footer"/>
+<footer th:replace="layout :: site-footer"></footer>
 
 </body>
 

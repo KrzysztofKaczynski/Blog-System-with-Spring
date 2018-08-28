@@ -6,17 +6,17 @@ public class Post {
 
     private Long id;
     private String title;
-    private String contents;
+    private String body;
     private User author;
     private Date date = new Date();
 
     public Post() {
     }
 
-    public Post(Long id, String title, String contents, User author) {
+    public Post(Long id, String title, String body, User author) {
         this.id = id;
         this.title = title;
-        this.contents = contents;
+        this.body = body;
         this.author = author;
     }
 
@@ -25,7 +25,7 @@ public class Post {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
+                ", body='" + body + '\'' +
                 ", author=" + author +
                 ", date=" + date +
                 '}';
@@ -47,12 +47,12 @@ public class Post {
         this.title = title;
     }
 
-    public String getContents() {
-        return contents;
+    public String getBody() {
+        return body;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public User getAuthor() {

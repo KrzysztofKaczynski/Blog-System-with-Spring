@@ -9,21 +9,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * pl.malykriszo.blog.services Created by MałyKriszo on 2018-08-28.
- */
 @Service
-public class PostServiceSampleDataInMemoryImpl implements PostService {
+public class PostServiceSampleDataInMemory implements PostService {
 
     private List<Post> posts = new ArrayList<Post>() {{
-        add(new Post(1L, "First Post", "<p>Line #1.</p><p>Line #2</p>", null));
-        add(new Post(2L, "Second Post", "Second post content:<ul><li>line 1</li><li>line 2</li></p>",
-                new User(10L, "pesho10", "Peter Ivanov")));
-        add(new Post(3L, "Post #3", "<p>The post number 3 nice</p>",
-                new User(10L, "merry", null)));
-        add(new Post(4L, "Forth Post", "<p>Not interesting post</p>", null));
-        add(new Post(5L, "Post Number 5", "<p>Just posting</p>", null));
-        add(new Post(6L, "Sixth Post", "<p>Another interesting post</p>", null));
+        add(new Post(1L, "Post numer 1", "<p>Line #1.</p><p>Line #2</p>", null));
+        add(new Post(2L, "Post numer 2" , "Second post content:<ul><li>line 1</li><li>line 2</li></p>",
+            new User(10L, "malykriszopl", "Mały Kriszo")));
+        add(new Post(3L, "Post numer 3", "<p>The post number 3 nice</p>",
+            new User(10L, "qris70", null)));
+        add(new Post(4L, "Post numer 4", "<p>Not interesting post</p>", null));
+        add(new Post(5L, "Post numer 5", "<p>Just posting</p>", null));
+        add(new Post(6L, "Post numer 6", "<p>Another interesting post</p>", null));
     }};
 
     @Override
@@ -49,7 +46,8 @@ public class PostServiceSampleDataInMemoryImpl implements PostService {
 
     @Override
     public Post create(Post post) {
-        post.setId(this.posts.stream().mapToLong(p -> p.getId()).max().getAsLong() + 1);
+        post.setId(this.posts.stream().mapToLong(
+                p -> p.getId()).max().getAsLong() + 1);
         this.posts.add(post);
         return post;
     }
