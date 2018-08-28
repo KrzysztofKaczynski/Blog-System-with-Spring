@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 /**
  * pl.malykriszo.blog.services Created by MałyKriszo on 2018-08-28.
+ *
+ * Only for test
  */
 @Service
 public class PostServiceSampleDataInMemoryImpl implements PostService {
