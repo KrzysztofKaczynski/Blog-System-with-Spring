@@ -9,19 +9,28 @@
 
 </head>
 <body>
-<header th:fragment="site-header">
-    <a href="index.html" th:href="@{/}"><img src="../public/img/blogsmall.png" th:src="@{/img/blogsmall.png}"/></a>
-    <a href="index.html" th:href="@{/}">Start</a>
-    <a href="users/login.html" th:href="@{/users/login}">Logowanie</a>
-    <a href="users/register.html" th:href="@{/users/register}">Rejestracja</a>
-    <a href="posts/index.html" th:href="@{/posts}">Posty</a>
-    <a href="posts/create.html" th:href="@{/posts/create}">Napisz posta</a>
-    <a href="users/index.html" th:href="@{/users}">Użytkownik</a>
-    <div id="logged-in-info"><span>Witaj, <b>(Użytkowniku)</b></span>
-        <form method="post" th:action="@{/users/logout}">
-            <input type="submit" value="Wyloguj"/>
-        </form>
-    </div>
+<header th:fragment="site-header" th:remove="tag">
+    <header>
+        <a href="index.html" th:href="@{/}"><img src="../public/img/blogsmall.png" th:src="@{/img/blogsmall.png}"/></a>
+        <a href="index.html" th:href="@{/}">Start</a>
+        <a href="users/login.html" th:href="@{/users/login}">Logowanie</a>
+        <a href="users/register.html" th:href="@{/users/register}">Rejestracja</a>
+        <a href="posts/index.html" th:href="@{/posts}">Posty</a>
+        <a href="posts/create.html" th:href="@{/posts/create}">Napisz posta</a>
+        <a href="users/index.html" th:href="@{/users}">Użytkownik</a>
+        <div id="logged-in-info"><span>Witaj, <b>(Użytkowniku)</b></span>
+            <form method="post" th:action="@{/users/logout}">
+                <input type="submit" value="Wyloguj"/>
+            </form>
+        </div>
+    </header>
+    <ul id="messages"
+        th:with="notifyMessages=${session[T(blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+        <li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"></li>
+        <span th:if="${notifyMessages}" th:remove="all"
+              th:text="${session.remove(T(blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+
+    </ul>
 </header>
 <h1>Witaj na moim blogu</h1>
 <p>Welcome to the Spring MVC Blog.</p>
