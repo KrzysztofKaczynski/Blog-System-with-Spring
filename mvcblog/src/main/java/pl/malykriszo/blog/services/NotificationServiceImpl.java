@@ -9,7 +9,7 @@ import java.util.List;
 
 public class NotificationServiceImpl implements NotificationService {
 
-    public static final String NOTIFY_MSG_SASSION_KEY = "siteNotificationMessages";
+    public static final String NOTIFY_MSG_SESSION_KEY = "siteNotificationMessages";
 
     @Autowired
     private HttpSession httpSession;
@@ -29,13 +29,13 @@ public class NotificationServiceImpl implements NotificationService {
     private void addNotificationMessage(NotificationMessageType type, String msg) {
 
         List<NotificationMessage> notifiyMessages = (List<NotificationMessage>)
-                httpSession.getAttribute(NOTIFY_MSG_SASSION_KEY);
+                httpSession.getAttribute(NOTIFY_MSG_SESSION_KEY);
         if (notifiyMessages == null) {
             notifiyMessages = new ArrayList<NotificationMessage>();
         }
 
         notifiyMessages.add(new NotificationMessage(type, msg));
-        httpSession.setAttribute(NOTIFY_MSG_SASSION_KEY, notifiyMessages);
+        httpSession.setAttribute(NOTIFY_MSG_SESSION_KEY, notifiyMessages);
     }
 
     public enum NotificationMessageType {
